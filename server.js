@@ -7,8 +7,8 @@ const { Chat } = require('./src/Chat');
 
 const chat = new Chat();
 chat.login('User 1');
-chat.login('User 2');
-console.log(chat.users);
+chat.login('User 3');
+console.log(chat.userNames);
 
 const app = new Koa();
 

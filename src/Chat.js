@@ -1,6 +1,6 @@
 class Chat {
   constructor() {
-    this.users = new Set();
+    this.userNames = new Set();
   }
 
   login(userName) {
@@ -9,13 +9,13 @@ class Chat {
       data: '',
     };
 
-    if (this.users.has(userName)) result.data = 'This name already taken';
+    if (this.userNames.has(userName)) result.data = 'This name already taken';
     else {
-      this.users.add(userName);
-      result.data = JSON.stringify({
+      this.userNames.add(userName);
+      result.data = {
         userName,
-        users: [...this.users],
-      });
+        userNames: [...this.userNames],
+      };
       result.success = true;
     }
     return result;
