@@ -1,6 +1,7 @@
 class Chat {
   constructor() {
     this.userNames = new Set();
+    this.sockets = new Map();
   }
 
   login(userName) {
@@ -19,6 +20,15 @@ class Chat {
       result.success = true;
     }
     return result;
+  }
+
+  getUserNames() {
+    return [...this.userNames];
+  }
+
+  removeUser(socket) {
+    this.userNames.delete(this.sockets.get(socket));
+    this.sockets.delete(socket);
   }
 }
 
