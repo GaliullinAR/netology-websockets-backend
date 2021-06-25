@@ -29,9 +29,10 @@ const router = new Router();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+// '/users' фронтендом не использовалось
 router.get('/users', async (ctx) => {
   console.log('URL', ctx.request.url);
-  ctx.response.body = JSON.stringify([...chat.users]);
+  ctx.response.body = JSON.stringify(chat.getUserNames());
 });
 
 router.post('/login', async (ctx) => {
@@ -59,6 +60,10 @@ wsServer.on('connection', (ws, req) => {
         case 'connected':
           message.userNames = chat.getUserNames();
           chat.sockets.set(req.socket, message.userName);
+          break;
+        case 'message':
+          // eslint-disable-next-line no-console
+          console.log(`User ${message.userName} sent a message`);
           break;
         // eslint-disable-next-line no-console
         default: console.log(`Unknown message type ${message.type}`);
